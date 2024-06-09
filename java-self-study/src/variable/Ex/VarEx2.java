@@ -1,4 +1,4 @@
-package variable;
+package variable.Ex;
 
 public class VarEx2 {
     public static void main(String[] args) {
