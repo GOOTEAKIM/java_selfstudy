@@ -1,4 +1,4 @@
-package exproblem;
+package exproblem.chap5;
 
 public class ex5_2 {
     public static void main(String[] args) {

@@ -378,3 +378,107 @@ public class Scanner1 {
 
 - print() : 출력하고 다음 라인으로 넘기지 않는다.
 - println() : 출력하고 다음 라인으로 넘긴다.
+---
+
+# 6/13
+
+## 8. 배열
+
+### 배열 선언, 생성
+
+```java 
+int [] students; // 배열 변수 선언
+students = new int[5]; // 배열 생성
+```
+---
+### 배열 사용
+
+```java
+//변수 값 대입
+students[0] = 90;
+students[1] = 80;
+//변수 값 사용
+System.out.println("학생1 점수: " + students[0]);
+System.out.println("학생2 점수: " + students[1]);
+```
+
+- 배열의 인덱스는 0부터 시작한다.
+---
+### 기본형 VS 참조형
+
+- 기본형 : 변수에 사용할 값을 직접 넣을 수 있는 타입
+  - int, long, double, boolean
+- 참조형 : 데이터에 접근하기 위한 참조(주소)를 저장하는 데이터 타입
+  - 객체, 클래스
+---
+### 배열 리펙토링
+
+- 리펙토링 : 기존의 코드 기능은 유지하면서 내부 구조를 개선하여 가독성을 높이고, 유지보수를 용이하게 하는 과정
+- 중복을 제거하고, 복잡성을 줄이며, 이해하기 쉬운 코드로 만든다.
+---
+### 배열 리펙토링 - 초기화
+
+```java
+int [] students;
+students = new int[] {90,80,70,60,50};
+```
+---
+### 2차원 배열
+
+- `int [][] arr = new int[2][3]`
+
+```java
+int[][] arr = new int[2][3]; // 2x3 2차원 배열, 초기화
+int i = 1;
+ // 순서대로 1씩 증가하는 값을 입력한다.
+
+ for (int row = 0; row < arr.length; row++) {
+    for (int column = 0; column < arr[row].length; column++) { arr[row][column] = i++;
+    }
+ }
+
+ // 2차원 배열의 길이를 활용
+ for (int row = 0; row < arr.length; row++) {
+    for (int column = 0; column < arr[row].length; column++) {
+        System.out.print(arr[row][column] + " ");
+    }
+    System.out.println();
+ }
+```
+---
+
+### 2차원 배열 생성
+
+```java
+int [][] arr = {
+    {1,2,3},
+    {4,5,6}
+}; 
+```
+---
+### for - each 문 (단축키 == iter)
+
+- for - each 문 정의
+
+```java
+for (변수 : 배열 또는 컬렉션) {
+    // 배열 또는 컬렉션의 요소를 순회하면서 수행할 작업
+}
+```
+---
+
+- 예시
+
+```java
+int[] numbers = {1, 2, 3, 4, 5}; // 1차원 배열 생성
+
+for (int number : numbers) {
+    System.out.println(number);
+}
+```
+---
+- 배열의 인덱스를 사용하지 않고, 종료 조건을 주지 않아도 된다. 
+- 단순히 해당 배열을 처음부터 끝까지 탐색한다.
+- 배열의 인덱스를 사용하지 않고도 배열의 요소를 순회할 수 있기 때문에 코드가 간결하고 가독성
+이 좋다.
+---

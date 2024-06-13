@@ -1,4 +1,4 @@
-package exproblem;
+package exproblem.chap7;
 
 import java.util.Scanner;
 
