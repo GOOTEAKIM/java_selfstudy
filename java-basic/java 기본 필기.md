@@ -343,3 +343,39 @@ public class MethodChange2 {
 ### 객체 : 속성, 기능을 가짐
 ---
 
+## 4. 생성자
+
+## 5. 패키지
+
+### 패키지 사용
+
+- 다른 패키지에서 특정 클래스의 생성자를 호출하려면 public을 사용해야 한다.
+
+```java
+package pack;
+public class PackageMain1 {
+    public static void main(String[] args) {
+        Data data = new Data();
+        pack.a.User user = new pack.a.User();
+    }
+}
+
+// 패키지 pack Data 생성
+// 패키지 pack.a 회원 생성
+```
+
+- 사용자와 같은 위치: 같은 패키지에 있는 경우에는 패키지 경로를 생략해도 된다.
+
+- 사용자와 다른 위치: 패키지가 다르면 pack.a.User 와 같이 패키지 전체 경로를 포함해서 클래스를 적어줘야 한다.
+---
+### 패키지 - import
+
+- `import 패키지의 경로.호출하고 싶은 클래스`
+- `*` : 패키지의 모든 클래스
+---
+### 패키지 규칙
+
+- 패키지의 이름과 위치는 폴더(디렉토리) 위치와 같아야 한다. (필수)
+- 패키지 이름은 모두 소문자를 사용한다. (관례)
+
+---
