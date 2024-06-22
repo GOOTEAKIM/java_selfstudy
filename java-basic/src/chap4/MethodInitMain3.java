@@ -1,6 +1,6 @@
 package chap4;
 
-public class MemberInitMain3 {
+public class MethodInitMain3 {
     public static void main(String[] args) {
         MemberInit member1 = new MemberInit();
         member1.initMember("user1", 15, 90);
