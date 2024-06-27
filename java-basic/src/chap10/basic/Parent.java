@@ -1,4 +1,4 @@
-package chap10;
+package chap10.basic;
 
 public class Parent {
     public void parentMethod() {

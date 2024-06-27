@@ -1,4 +1,4 @@
-package chap10;
+package chap10.basic;
 
 public class CastingMain6 {
     public static void main(String[] args) {
@@ -12,11 +12,11 @@ public class CastingMain6 {
     }
 
     public static void call(Parent parent) {
-        parent.parentMethod();
-
         if (parent instanceof Child child) {
             System.out.println("Child 인스턴스 맞음");
             child.childMethod();
+        } else {
+            System.out.println("인스턴스가 아님");
         }
     }
 }

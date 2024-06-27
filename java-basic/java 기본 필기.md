@@ -698,3 +698,318 @@ public class Data3 {
 - final 로 선언된 메서드는 오버라이드 될 수 없다. 상속받은 서브 클래스에서 이 메서드를 변경할 수 없다.
 - 예: public final void myFinalMethod() {...}
 ---
+
+# 6/27
+
+## 10. 다형성 1
+
+### 다형성 시작
+
+- 객체 지향 프로그래밍의 대표적인 특징
+
+- 캡슐화
+- 상속
+- 다형성 : 다양한 형태, 여러 형태
+---
+#### 다형성을 이해하기 위한 핵심 이론
+
+- 다형적 참조
+- 메서드 오버라이딩
+
+---
+
+### 다형적 참조
+
+- 자바에서 부모 타입은 자신은 물론이고, 자신을 기준으로 모든 자식 타입을 참조할 수 있다. 
+- 하나의 변수 타입으로 다양한 자식 인스턴스를 참조할 수 있는 기능
+
+  ```java
+
+  public class Parent {
+      public void parentMethod() {
+          System.out.println("Parent.parentMethod");
+      }
+  }
+  ```
+
+  ```java
+  public class Child extends Parent {
+      public void childMethod() {
+          System.out.println("Child.childMethod");
+      }
+  }
+  ```
+
+  ```java
+  // 다형적 참조: 부모는 자식을 품을 수 있다.
+  public class PolyMain {
+      public static void main(String[] args) {
+
+          // 부모 변수가 부모 인스턴스 참조
+          System.out.println("Parent -> Parent");
+          Parent parent = new Parent();
+          parent.parentMethod();
+
+          // 자식 변수가 자식 인스턴스 참조
+          System.out.println("Child -> Child");
+          Child child = new Child();
+          child.parentMethod();
+          child.childMethod();
+
+          //부모 변수가 자식 인스턴스 참조(다형적 참조)
+          System.out.println("Parent -> Child");
+          Parent poly = new Child();
+          poly.parentMethod();
+
+          //Child child1 = new Parent(); 자식은 부모를 담을 수 없다.
+
+          //자식의 기능은 호출할 수 없다. 컴파일 오류 발생
+          //poly.childMethod();
+      }
+  }
+  ```
+
+1. 부모 타입의 변수가 부모 인스턴스 참조
+
+   - `Parent -> Parent: parent.parentMethod()`
+     
+   - 부모 타입의 변수가 부모 인스턴스를 참조한다.
+   - Parent parent = new Parent()
+   - Parent 인스턴스를 만들었다. 이 경우 부모 타입인 Parent 를 생성했기 때문에 메모리 상에 Parent 만 생성된다.(자식은 생성되지 않는다.)
+   - 생성된 참조값을 Parent 타입의 변수인 parent 에 담아둔다.
+   - parent.parentMethod() 를 호출하면 인스턴스의 Parent 클래스에 있는 parentMethod() 가 호출된
+   다.
+    ---
+2. 자식 타입의 변수가 자식 인스턴스 참조
+
+   - `Child -> Child: child.childMethod()`
+
+   - 자식 타입의 변수가 자식 인스턴스를 참조한다.
+   - Child child = new Child()
+   - Child 인스턴스를 만들었다. 이 경우 자식 타입인 Child 를 생성했기 때문에 메모리 상에 Child 와 Parent 가 모두 생성된다.
+   - 생성된 참조값을 Child 타입의 변수인 child 에 담아둔다.
+   - child.childMethod() 를 호출하면 인스턴스의 Child 클래스에 있는 childMethod() 가 호출된다.
+
+    --- 
+
+3. 다형적 참조: 부모 타입의 변수가 자식 인스턴스 참조
+
+   - `Parent -> Child: poly.parentMethod()`
+
+   - 부모 타입의 변수가 자식 인스턴스를 참조한다.
+   - Parent poly = new Child()
+   - Child 인스턴스를 만들었다. 이 경우 자식 타입인 Child 를 생성했기 때문에 메모리 상에 Child 와 Parent 가 모두 생성된다.
+   - 생성된 참조값을 Parent 타입의 변수인 poly 에 담아둔다.
+
+   - `부모는 자식을 담을 수 있다.`
+
+   - Parent poly 는 부모 타입이다. new Child() 를 통해 생성된 결과는 Child 타입이다. 자바에서 부모 타입은 자식 타입을 담을 수 있다.
+     - Parent poly = new Child() : 성공
+
+   - 반대로 자식 타입은 부모 타입을 담을 수 없다.
+     - Child child1 = new Parent() : 컴파일 오류 발생
+
+---
+
+#### 부모는 자식을 담을 수 있지만 자식은 부모를 담을 수 없다.
+
+```java
+Parent parent = new Child() // 부모는 자식을 담을 수 있다.
+Parent parent = child // 위와 같은 형태
+```
+---
+
+### 캐스팅
+
+- 업캐스팅 : 부모 타입으로 변경
+- 다운캐스팅 : 자식 타입으로 변경
+
+- 다운캐스팅, 실행
+
+  ```java
+  //다운캐스팅(부모 타입 -> 자식 타입)
+  Child child = (Child) poly;
+  child.childMethod();
+  ```
+
+- 다운캐스팅으로 child.childMethod() 를 호춣라 수 있다.
+- childMethod()를 호출하려면 해당 인스턴스를 찾아가고 Child 타입을 찾는다.
+---
+### 캐스팅의 종류
+
+```java
+Child child = (Child) poly
+child.childMethod();
+```
+
+- 자식 타입의 기능을 사용하려면 다운캐스팅 결과르 변수에 담아두고 이후에 기능을 사용해야한다.
+---
+#### 일시적 다운 캐스팅
+
+```java
+public class CastingMain2 {
+    public static void main(String[] args) {
+
+        Parent poly = new Child();
+        //단 자식의 기능은 호출할 수 없다. 컴파일 오류 발생
+        //poly.childMethod();
+
+        //일시적 다운캐스팅 - 해당 메서드를 호출하는 순간만 다운캐스팅
+        ((Child) poly).childMethod();
+    }
+}
+```
+
+- 일시적 다운캐스팅을 사용하면 별도의 변수 없이 인스턴스의 자식 타입의 기능을 사용할 수 있다.
+---
+#### 업캐스팅
+
+- 현재 타입을 부모 타입으로 변경하는 것
+
+```java
+//upcasting vs downcasting
+public class CastingMain3 {
+    public static void main(String[] args) {
+        Child child = new Child();
+        Parent parent1 = (Parent) child; //업캐스팅은 생략 가능, 생략 권장
+        Parent parent2 = child; //업캐스팅 생략
+
+        parent1.parentMethod();
+        parent2.parentMethod();
+    }
+}
+```
+
+- 부모 타입으로 변환하는 경우에는 `(타입)` 을 생략할 수 있다.
+
+- 업캐스팅은 생략할 수 있다. 
+- 다운캐스팅은 생략할 수 없다. 
+- 참고로 업캐스팅은 매우 자주 사용하기 때문에 생략을 권장한다.
+---
+### instanceof
+
+- 특정 변수가 참조하는 인스턴스 타입을 확인하고 싶으면 instanceof 을 사용하면 된다.
+
+  ```java
+  public class CastingMain5 {
+      public static void main(String[] args) {
+          Parent parent1 = new Parent();
+          System.out.println("parent1 호출");
+          call(parent1);
+          Parent parent2 = new Child();
+          System.out.println("parent2 호출");
+          call(parent2);
+      }
+
+      private static void call(Parent parent) {
+          parent.parentMethod();
+          if (parent instanceof Child) {
+          System.out.println("Child 인스턴스 맞음");
+          Child child = (Child) parent;
+          child.childMethod();
+          }
+      }
+  }
+  ```
+---
+### 자바 16 - Pattern Matching for instanceof
+
+- 자바 16부터는 instanceof 를 사용하면서 동시에 변수를 선언할 수 있다.
+
+  ```java
+  public class CastingMain6 {
+      public static void main(String[] args) {
+          Parent parent1 = new Parent();
+          System.out.println("parent1 호출");
+          call(parent1);
+          Parent parent2 = new Child();
+          System.out.println("parent2 호출");
+          call(parent2);
+      }
+
+      private static void call(Parent parent) {
+          parent.parentMethod();
+          //Child 인스턴스인 경우 childMethod() 실행
+          if (parent instanceof Child child) {
+          System.out.println("Child 인스턴스 맞음");
+          child.childMethod();
+          }
+      }
+  }
+  ```
+---
+### 메서드 오버라이딩
+
+- 기존 기능을 하위 타입에서 새로운 기능으로 재정의
+
+- `오버라이딩 된 메서드가 항상 우선권을 가진다.`
+
+  ```java
+  public class Parent {
+      public String value = "parent";
+
+      public void method() {
+          System.out.println("Parent.method");
+      }
+  }
+  ```
+
+  ```java
+  public class Child extends Parent {
+      public String value = "child";
+
+      @Override
+
+      public void method() {
+          System.out.println("Child.method");
+      }
+  }
+  ```
+
+- Child 에서 Parent 의 method() 를 재정의(오버라이딩) 했다.
+
+  ```java
+  public class OverridingMain {
+      public static void main(String[] args) {
+
+          //자식 변수가 자식 인스턴스 참조
+          Child child = new Child();
+          System.out.println("Child -> Child");
+          System.out.println("value = " + child.value);
+          child.method();
+
+          //부모 변수가 부모 인스턴스 참조
+          Parent parent = new Parent();
+          System.out.println("Parent -> Parent");
+          System.out.println("value = " + parent.value);
+          parent.method();
+
+          //부모 변수가 자식 인스턴스 참조(다형적 참조) 
+          Parent poly = new Child();
+          System.out.println("Parent -> Child");
+          System.out.println("value = " + poly.value); //변수는 오버라이딩X
+          poly.method(); //메서드 오버라이딩!
+      }
+  }
+  ```
+
+1. Child -> Child
+
+   - child 변수는 Child 타입이다. 
+   - 따라서 child.value , child.method() 를 호출하면 인스턴스의 Child 타입에서 기능을 찾아서 실행한다.
+    ---
+2. Parent -> Parent
+
+   - parent 변수는 Parent 타입이다. 
+   - 따라서 parent.value , parent.method() 를 호출하면 인스턴스의 Parent 타입에서 기능을 찾아서 실행한다.
+    ---
+3. `Parent -> Child`
+
+   - poly 변수는 Parent 타입이다. 
+   - 따라서 poly.value , poly.method() 를 호출하면 인스턴스의 Parent 타입에서 기능을 찾아서 실행한다.
+
+     - poly.value : Parent 타입에 있는 value 값을 읽는다.
+     - poly.method() : Parent 타입에 있는 method() 를 실행하려고 한다. 그런데 하위 타입인 Child.method() 가 오버라이딩 되어 있다. `오버라이딩 된 메서드는 항상 우선권을 가진다.` 따라서 Parent.method() 가 아니라 Child.method() 가 실행된다.
+
+   - `오버라이딩 된 메서드는 항상 우선권을 가진다.`
+---
