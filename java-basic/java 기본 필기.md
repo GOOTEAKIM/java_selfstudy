@@ -1013,3 +1013,114 @@ public class CastingMain3 {
 
    - `오버라이딩 된 메서드는 항상 우선권을 가진다.`
 ---
+
+# 6/29
+
+## 11. 다형성 2
+
+### 추상 클래스 1
+---
+#### 추상 클래스
+
+- 부모 클래스는 제공하지만, 실제 생성되면 안되는 클래스
+- 추상적인 개념을 제공하는 클래스
+- 실체인 인스턴스가 존재하지 않는다. 인스턴스를 생성할 수 없다.
+- 상속을 목적으로 사용되고, 부모 클래스 역할을 담당한다.
+
+  ```java
+  abstract class AbstractAnimal {...}
+  ```
+
+- 추상 클래스는 클래스를 선언할 때 앞에 abstract 키워드를 붙여주면 된다.
+
+---
+
+#### 추상 메서드
+
+- 추상적인 개념을 제공하는 메서드
+- 부모 클래스를 상속 받는 자식 클래스가 `반드시 오버라이딩 해야 하는 메서드`
+- 실체가 존재하지 않고, 메서드 바디가 없다.
+
+  ```java
+  public abstract void sound();
+  ```
+
+- `추상 메서드가 하나라도 있는 클래스는 추상 클래스로 선언해야 한다.`
+- `추상 메서드는 상속 받는 자식 클래스가 반드시 오버라이딩 해서 사용해야 한다.`
+
+---
+
+### 추상 클래스 2
+---
+#### 순수 추상 클래스
+
+- 순수 추상 클래스
+
+  ```java
+  public abstract class AbstractAnimal {
+      public abstract void sound();
+      public abstract void move();
+  }
+  ```
+
+- 인스턴스를 생성할 수 없다.
+- 상속시 자식은 모든 메서드를 오버라이딩 해야 한다.
+- 주로 다형성을 위해 사용된다.
+
+- `상속하는 클래스는 모든 메서드를 구현해야 한다.`
+---
+### 인터페이스
+
+- 순수 추상 클래스를 더 편리하게 사용할 수 있는 기능
+
+- 인터페이스
+
+  ```java
+  public interface InterfaceAnimal {
+    public abstract void sound();
+    public abstract void move();
+  }
+  ```
+
+- 인터페이스 - public abstract 키워드 생략 가능
+
+  ```java
+  public interface InterfaceAnimal {
+    void sound();
+    void move();
+  }
+  ```
+
+- 인터페이스의 메서드는 모두 public , abstract 이다.
+- 메서드에 public abstract 를 생략할 수 있다. 생략이 권장.
+- 인터페이스는 다중 구현(다중 상속)을 지원한다.
+
+  ```java
+  public interface InterfaceAnimal {
+    void sound();
+    void move();
+  }
+  ```
+
+  ```java
+  public class Dog implements InterfaceAnimal {
+      @Override
+      public void sound() {
+          System.out.println("멍멍");
+      }
+      @Override
+      public void move() {
+          System.out.println("개 이동");
+      }
+  }
+  ```
+
+- 인터페이스를 상속 받을 때는 extends 대신에 `implements` 사용
+- 상속이라는 말 대신 구현이라고 한다.
+---
+#### 인터페이스를 사용해야 하는 이유
+
+- 인터페이스를 구현하는 곳에서 인터페이스의 메서드를 반드시 구현해라는 규
+약(제약)을 주는 것이다.
+- 부모를 여러명 두는 다중 구현(다중 상속)이 가능하다.
+---
