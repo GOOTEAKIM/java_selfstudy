@@ -1,5 +1,9 @@
 # 6/15
 
+## 커피잔 아이콘이 뜨면서 코드 실행이 안될 때?
+
+- src 우클릭 - Make Directory as - Source Root
+
 ## 1. 클래스와 데이터
 
 ### 클래스
@@ -832,7 +836,7 @@ Parent parent = child // 위와 같은 형태
   child.childMethod();
   ```
 
-- 다운캐스팅으로 child.childMethod() 를 호춣라 수 있다.
+- 다운캐스팅으로 child.childMethod() 를 호출할 수 있다.
 - childMethod()를 호출하려면 해당 인스턴스를 찾아가고 Child 타입을 찾는다.
 ---
 ### 캐스팅의 종류
